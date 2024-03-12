@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Integration Example</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+    <script type="text/javascript" src="https://www.dropbox.com/static/api/2/dropins.js" id="dropboxjs" data-app-key="mj2ikzh7ldbksvk"></script>
+    <style>
+        #demo-area {
+            height: 100px;
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body>
+        <h1 class="title">File Selector Example</h1>
+            <div class="tile is-parent">
+                   <p class="subtitle"> <a href="https://www.dropbox.com/developers/chooser">File Selector</a>
+                    A convenient way to incorporate Dropbox file selection into your app.</p>
+                    <div id="demo-area"></div>
+                    <button id="result-area">
+            </div>
+<script>
+    let resultArea = document.getElementById("result-area");
+    resultArea.style.display = "none";
+    options = {
+        success: function(files) {
+            resultArea.style.display = "block";
+            let resultLink = document.getElementById('result-link');
+            resultLink.innerHTML = files[0].link;
+            resultLink.href = files[0].link;
+        },
+        cancel: function() {
+            resultArea.style.display = "none";
+            alert("Selection Cancelled")
+        },
+        linkType: "preview",
+        multiselect: false,
+        extensions: ['.pdf', '.doc', '.docx', '.png'],
+        folderselect: false,
+    };
+
+    var button = Dropbox.createChooseButton(options);
+    document.getElementById("demo-area").appendChild(button);
+</script>
+</body>
+</html>
